@@ -1,0 +1,126 @@
+Moti che sfruttano l'interazione tra' corpi diversi :
+
+
+
+Carica di prova vicino ad una carica fissa (positiva)(repulsione)
+
+
+Corpo 1 , box 1 :
+
+var x = 500 , y = 200;
+setName('qFissa');
+
+Corpo 1 , box 2 :
+
+
+
+
+_________________________________
+
+
+
+
+Corpo 2 , box 1 :
+
+var x = 460 , y = 170;
+
+var rx = 0;
+var ry = 0;
+
+Corpo 2 , box 2 :
+
+rx = x - getXOf('qFissa');
+ry = y - getYOf('qFissa');
+
+
+x += (Math.abs(2500/rx))/rx;
+y += (Math.abs(2500/ry))/ry; 
+
+
+
+
+
+
+/////////////////////////////////////////////////
+
+
+Carica di prova vicino a due cariche fisse (positive) (repulsione)
+
+Corpo 1 , box 1 :
+
+var x = 500 , y = 200;
+setName('q1');
+
+Corpo 1 , box 2 :
+
+
+_________________________________
+
+Corpo 2 , box 1 :
+
+var x = 100 , y = 200;
+setName('q2');
+
+Corpo 2 , box 2 :
+
+
+_________________________________
+
+Corpo 3 , box 1 :
+
+var x = 460 , y = 170;
+
+var r1x = 0;
+var r1y = 0;
+var r2x = 0;
+var r2y = 0;
+
+
+Corpo 3 , box 2 :
+
+
+r1x = x - getXOf('q1');
+r1y = y - getYOf('q1');
+
+r2x = x - getXOf('q2');
+r2y = y - getYOf('q2');
+
+x += (Math.abs(2500/r1x))/r1x   +  (Math.abs(2500/r2x))/r2x;
+y += (Math.abs(2500/r1y))/r1y   +  (Math.abs(2500/r2y))/r2y; 
+
+
+
+
+/////////////////////////////////////////////////
+
+Proiezione del moto circolare su una dimensione
+
+
+Corpo 1 , box 1 :
+
+var x = 450, y = 300;
+var dx=0, dy = 0;
+collectData('PosizioneX','x','PosizioneY','y','VelocitaX','dx','VelocitaY','dy');
+setName('a');
+
+
+Corpo 1 , box 2 :
+
+x+=dx;
+y+=dy;
+dx = (x - 300) * (Math.cos(-25) - 1) + (y - 300) * Math.sin(-25)
+dy = (y - 300) * (Math.cos(-25) - 1) - (x - 300) * Math.sin(-25)
+
+
+_________________________________
+
+Corpo 2 , box 1 :
+
+var x = 472, y = 20;
+
+Corpo 2 , box 2 :
+
+x = getXOf('a');
+
+
+

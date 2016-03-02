@@ -1,0 +1,152 @@
+
+==================================================
+Moto rettilineo
+
+var x = 55, y = 437;
+var dx=3, dy = 4;
+-----------------
+x+=dx;
+if(x+15>w||x<0) dx*=-1;
+if(y+15>w||y<0) dy*=-1;
+
+Visto che il moto rettilineo uniforme si basa su un corpo che si muove su una retta,seguendo una direzione, dopo abbiamo
+assegnato il comando (x+=dx;) che fa muovere il quadratino lungo l'asse x
+ 
+delta spazio= velocita*delta tempo(fisica)
+Nel moto rettilineo in javascript bisogna assegnare il comando che faccia muovere il quadratino sull'asse x e non sull'asse y.
+Dopo cio abbiamo dovuto confinarlo nelle quadrato predisposto dandogli un comando che generava una forza opposta al suo verso.(procedimento)
+
+
+==================================================
+
+Moto parabolico
+
+var x = 75, y = 376;
+var dx=3, dy = 4;
+---------------
+
+x+=dx;
+y+=dy;
+if(y<h)dy++;
+if(x+15>w||x<0) dx*=-1;
+if(y+15>w||y<0) dy*=-1;
+
+
+x+=dx;
+y+=dy;
+dy -= 0.05;
+
+if(x+15>w||x<0) dx*=-1;
+if(y+15>h||y<0) dy*=-1;
+
+==================================================
+LA PARABOLA
+
+var x = 0, y = 0;
+var dx=2, dy = 4;
+collectData('PosizioneX','x','PosizioneY','y','VelocitàX','dx','VelocitàY','dy');
+
+----------
+
+x+=dx;
+y+=dy;
+dy -= 0.00981;
+if(x+15>w||x<0) dx*=-1;
+if(y+15>h) dy*=-1;
+if(y<0){dy=0;dx=0;}
+
+
+==================================================
+
+
+
+I primi 2 comandi (x+=dx;y+=dy) ci sono perchè il moto parabolico si muove sia sull'asse x sia sull'asse y.
+Il terzo comando (if(y<h)dy++) serve per far simulare l'accelerazione al quadratino ad ogni unità di tempo.
+
+y=velocita y* tempo-1/2*accelerazione*tempo^2(fisica)
+Nel moto parabolico in javascript bisogna assegnare il comando che faccia muovere il quadratino sia sull' asse x 
+e sia sull'asse y.Dopo ciò abbiamo dovuto assegnare una forza, che si doveva attivare nel momento in cui y 
+diventava minore dell'altezza massima, la quale rispingeva il quadratino nel verso opposto.(procedimento)
+
+
+==================================================
+
+Moto circolare (gira troppo velocemente)
+
+var x = 450, y = 300;
+var dx=0, dy = 0;
+collectData('PosizioneX','x','PosizioneY','y','VelocitaX','dx','VelocitaY','dy');
+------------
+(angolo in gradi < orario)
+(angolo in gradi > antiorario)
+x+=dx;
+y+=dy;
+dx = (x - 300) * (Math.cos(-25) - 1) + (y - 300) * Math.sin(-25)
+dy = (y - 300) * (Math.cos(-25) - 1) - (x - 300) * Math.sin(-25)
+
+Prima di essere arrivati alle formule riportate sopra abbiamo effettuato diversi calcoli:
+x(t)=sen t-->vx(t)=x(t+1)-x(t)-->x(t)=(cos1-1)+y(t)sen(1)
+y(t)=cos t-->vy(t)=y(t+1)-y(t)-->y(t)=(cos1-1)+x(t)sen(1)
+
+Trovato queste formule le abbiamo sostituite in javascript.All'inizio per arrivare ai comandi in javascript abbiamo scritto delle variabili
+x e y in funzione del tempo.Queste due variabili equivalgono a cos t e sen t e dopodiche si è calcolata la velocita media sull'asse x e y.
+
+
+
+velocità = 2* 3.14* raggio / tempo(fisica)
+In questo moto è bastato scrivere 2 comandi in più rispetto a quello parabolico. Facendo conto che il moto circolare si basa su una forza che spinge all'esterno e una all'interno, inoltre abbiamo intuito l'equivalenza di
+queste 2 forze nei confronti di dx e dy seguiti da una costante (piccola per non creare ellissi).
+
+
+
+
+==================================================
+
+MOLLA
+
+var x = 200, y = 300;
+var dx=0, dy = 0;
+
+------
+(solo x o y per vederlo in linea)
+
+x+=dx;
+y+=dy;
+dx += -0.01*(x-100);
+dy += -0.01*(y-150);
+
+SMORZATO
+
+var x = 200, y = 150;
+var dx=0, dy = 0;
+
+--------------
+x+=dx;
+dx += -0.01*(x-100) + 0.001*dx;
+
+
+
+FERMATA MOLLA(legge oraria con smorzamento piccolo)
+
+var x = 200, y = 150;
+var dx=0, dy = 0; 
+
+------
+
+x+=dx;
+dx += -0.01*(x-100) - 0.005*dx;
+
+
+
+==================================================
+
+SMORZATO con Collezione Di Dati
+
+var x = 200, y = 150;
+var dx=0, dy = 0;
+collectData('PosizioneX','x','PosizioneY','y','AccelerazioneX','dx','AccelerazioneY','dy');
+setCollectDatatps(1);
+
+--------------
+x+=dx;
+dx += -0.01*(x-100) + 0.01*dx;
